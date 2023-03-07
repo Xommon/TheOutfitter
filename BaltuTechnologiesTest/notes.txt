@@ -1,1 +1,10 @@
 Outfit App : Baltu Technologies
+
+// App
+-Button creates outfit and shows to user. 
+-Change outfit recommendations based on two criteria.
+-Use API to get outfit inventory/clothing data.
+
+// Document
+-Write one-page document which describes technology used.
+-Write recommendation for additional feature not used in app.
