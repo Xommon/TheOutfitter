@@ -29,6 +29,7 @@ public class RestAPI : MonoBehaviour
     // UI
     public GameObject loadingScreen;
     public GameManager gameManager;
+    public string previousGenderExpression;
 
     public GameManager.Item[] tempArray;
 
@@ -38,11 +39,11 @@ public class RestAPI : MonoBehaviour
 
         loadingScreen.SetActive(true);
 
-        if (gameManager.currentGenderExpression == "Masculine" && gameManager.torsoItems[0].title == "")
+        if (gameManager.currentGenderExpression == "Masculine")
         {
             StartCoroutine(GetData(mascURLs));
         }
-        else if (gameManager.currentGenderExpression == "Feminine" && gameManager.torsoItems[0].title == "")
+        else if (gameManager.currentGenderExpression == "Feminine")
         {
             StartCoroutine(GetData(femURLs));
         }
@@ -59,7 +60,9 @@ public class RestAPI : MonoBehaviour
     IEnumerator GetData(string[] urlSet)
     {
         int i = 0, x = 0; // i = Index of itemsArrays | x = Index of Item fields (title, image, link)
+        time = 0;
 
+        if (previousGenderExpression != gameManager.currentGenderExpression)
         for (i = x; i < 3; i++)
         {
             x = 0;
@@ -83,6 +86,11 @@ public class RestAPI : MonoBehaviour
                 while (stats[3][x] != null)
                 {
                     gameManager.itemsArrays[i][x].title = stats[3][x]["title"];
+                    gameManager.itemsArrays[i][x].price = stats[3][x]["prices"][0]["value"];
+                    if (gameManager.itemsArrays[i][x].price == null)
+                    {
+                        gameManager.itemsArrays[i][x].price = stats[3][x]["prices"][0]["raw"].ToString().Substring(1, stats[3][x]["prices"][0]["raw"].Count);
+                    }
                     gameManager.itemsArrays[i][x].link = stats[3][x]["link"];
                     gameManager.itemsArrays[i][x].imageURL = stats[3][x]["image"];
                     x++;
@@ -92,6 +100,7 @@ public class RestAPI : MonoBehaviour
 
         loadingScreen.SetActive(false);
         gameManager.CreateOutfit();
+        previousGenderExpression = gameManager.currentGenderExpression;
 
         Debug.Log("Completed after " + time + " seconds");
         test = false;

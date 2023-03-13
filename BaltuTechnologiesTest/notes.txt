@@ -8,3 +8,7 @@ Outfit App : Baltu Technologies
 // Document
 -Write one-page document which describes technology used.
 -Write recommendation for additional feature not used in app.
+
+FIX THE PRICE CHECK
+Deadzones
+Load objects at start

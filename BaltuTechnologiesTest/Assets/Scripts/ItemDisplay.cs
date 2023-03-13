@@ -18,6 +18,7 @@ public class ItemDisplay : MonoBehaviour
     {
         titleText.text = item.title;
         StartCoroutine(GetTexture(item.imageURL));
+        rawImage.SetNativeSize();
     }
 
     public void GoToWebsite()
