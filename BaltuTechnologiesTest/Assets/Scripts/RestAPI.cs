@@ -27,7 +27,6 @@ public class RestAPI : MonoBehaviour
     public float time;
 
     // UI
-    public GameObject loadingScreen;
     public GameManager gameManager;
     public string previousGenderExpression;
 
@@ -37,7 +36,7 @@ public class RestAPI : MonoBehaviour
     {
         test = true;
 
-        loadingScreen.SetActive(true);
+        gameManager.loadingScreen.SetActive(true);
 
         if (gameManager.currentGenderExpression == "Masculine")
         {
@@ -74,7 +73,7 @@ public class RestAPI : MonoBehaviour
                 if (request.result == UnityWebRequest.Result.ConnectionError)
                 {
                     Debug.LogError(request.error);
-                    loadingScreen.SetActive(false);
+                    gameManager.loadingScreen.SetActive(false);
                     break;
                 }
 
@@ -98,7 +97,7 @@ public class RestAPI : MonoBehaviour
             }
         }
 
-        loadingScreen.SetActive(false);
+        gameManager.loadingScreen.SetActive(false);
         gameManager.CreateOutfit();
         previousGenderExpression = gameManager.currentGenderExpression;
 

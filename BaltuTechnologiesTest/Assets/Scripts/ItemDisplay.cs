@@ -11,14 +11,11 @@ public class ItemDisplay : MonoBehaviour
     public GameManager.Item item;
 
     // UI
-    public TextMeshProUGUI titleText;
     public RawImage rawImage;
 
     public void UpdateDisplay()
     {
-        titleText.text = item.title;
         StartCoroutine(GetTexture(item.imageURL));
-        rawImage.SetNativeSize();
     }
 
     public void GoToWebsite()
@@ -39,5 +36,7 @@ public class ItemDisplay : MonoBehaviour
         {
             rawImage.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
         }
+
+        rawImage.SetNativeSize();
     }
 }

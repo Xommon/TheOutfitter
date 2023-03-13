@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private RestAPI restApi;
     public ItemDisplay[] itemDisplay;
+    public GameObject loadingScreen;
 
     // Settings
     public GameObject settingsPanel;
@@ -28,6 +29,17 @@ public class GameManager : MonoBehaviour
         public string price;
         public string link;
         public string imageURL;
+    }
+
+    private void Start()
+    {
+        // Load assets
+        //loadingScreen.SetActive(true);
+
+        currentGenderExpression = gEdropdown.options[gEdropdown.value].text;
+        currentPriceMax = priceMaxDropdown.options[priceMaxDropdown.value].text;
+
+        itemsArrays = new Item[][] { torsoItems, legsItems, feetItems };
     }
 
     public void CreateOutfit()
@@ -51,14 +63,6 @@ public class GameManager : MonoBehaviour
             itemDisplay[i].item = suggestedOutfit[i];
             itemDisplay[i].UpdateDisplay();
         }
-    }
-
-    private void Start()
-    {
-        currentGenderExpression = gEdropdown.options[gEdropdown.value].text;
-        currentPriceMax = priceMaxDropdown.options[priceMaxDropdown.value].text;
-
-        itemsArrays = new Item[][] { torsoItems, legsItems, feetItems };
     }
 
     float DeterminePrice(string priceText)
