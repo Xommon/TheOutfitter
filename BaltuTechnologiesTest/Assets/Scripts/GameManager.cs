@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public RestAPI restApi;
-    public Item[] items;
+    private RestAPI restApi;
     public ItemDisplay itemDisplay;
-    public Item headItem, torsoItem, legsItem, feetItem;
-    public List<Item> testItems = new List<Item>();
+    public TMP_Dropdown gEdropdown;
+    public string currentGenderExpression;
+
+    public Item[] torsoItems, legsItems, feetItems;
+    public Item[][] itemsArrays;
+    public Item[] suggestedOutfit = new Item[3];
 
     [Serializable]
     public class Item
@@ -19,8 +23,24 @@ public class GameManager : MonoBehaviour
         public string imageURL;
     }
 
-    public void CreateOutfit(int index)
+    public void CreateOutfit()
     {
-        itemDisplay.item = items[index];
+        // Created suggested outfit
+        for (int i = 0; i < 3; i++)
+        {
+            suggestedOutfit[i] = itemsArrays[i][UnityEngine.Random.Range(0, 48)];
+        }
+    }
+
+    private void Start()
+    {
+        currentGenderExpression = gEdropdown.options[gEdropdown.value].text;
+
+        itemsArrays = new Item[][] { torsoItems, legsItems, feetItems };
+    }
+
+    public void ChangeGenderExpression()
+    {
+        currentGenderExpression = gEdropdown.options[gEdropdown.value].text;
     }
 }

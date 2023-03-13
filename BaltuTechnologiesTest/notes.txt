@@ -8,8 +8,3 @@ Outfit App : Baltu Technologies
 // Document
 -Write one-page document which describes technology used.
 -Write recommendation for additional feature not used in app.
-
-title
-link
-image
-price[1]

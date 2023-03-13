@@ -14,7 +14,6 @@ public class ItemDisplay : MonoBehaviour
     public TextMeshProUGUI titleText;
     public RawImage rawImage;
 
-
     public void UpdateDisplay()
     {
         titleText.text = item.title;
